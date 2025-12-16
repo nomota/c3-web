@@ -194,11 +194,29 @@ For example:
 
 ```c3
 // C3 code:
-fn int? get_value();
+fn int? get_value(int x, int y);
+
+int? result = get_value(2, 3);
+if (catch err = result) {
+    // process with err
+    io::printn(err);
+} else {
+    // process with result
+}
 ```
 
 ```c
 // Corresponding C code:
-c3fault_t get_value(int *value_ref);
+c3fault_t get_value(int *result, int x, int y);
+
+int result;
+c3fault_t err = get_value(&result, 2, 3);
+if (err != 0) {
+    // process with err
+    // how to get name from err?
+    printf("%s\n", strerror(err));
+} else {
+    // process with result
+} 
 ```
 The `c3fault_t` is guaranteed to be a pointer sized value.
