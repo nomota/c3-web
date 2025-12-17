@@ -207,14 +207,18 @@ if (catch err = result) {
 
 ```c
 // Corresponding C code:
-c3fault_t get_value(int *result, int x, int y);
+typedef struct {
+    char *name;
+    void *val;
+} *c3default_t;
+
+extern c3fault_t get_value(int *result, int x, int y);
 
 int result;
 c3fault_t err = get_value(&result, 2, 3);
 if (err != 0) {
     // process with err
-    // how to get name from err?
-    printf("%s\n", strerror(err));
+    printf("%s\n", err->name);
 } else {
     // process with result
 } 
