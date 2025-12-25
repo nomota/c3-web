@@ -214,7 +214,7 @@ typedef struct {
 
 extern c3fault_t get_value(int *result, int x, int y);
 
-int result;
+int result; // return value is fetched by reference
 c3fault_t err = get_value(&result, 2, 3);
 if (err != 0) {
     // process with err
